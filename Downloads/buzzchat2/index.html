@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzChat Hero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 1. RESET & VARIABLES */
+        :root {
+            --bg-color: #1a1a1a; 
+            --buzz-pink: #FE3C86;
+            --buzz-purple: #6A35FD;
+            --ngl-orange: #FF5A00;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* 2. HERO CONTAINER */
+        .hero-screen {
+            position: relative;
+            width: 97%; 
+            height: 90vh; 
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 3. BACKGROUND SVG */
+        .hero-bg-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; 
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+        }
+
+        /* 4. NAVBAR */
+        .navbar {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .nav-logo {
+            height: 60px;
+            width: auto; 
+            transform: rotate(-3deg);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-logo:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 0.8; }
+
+        .store-pill {
+            background: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .store-icon svg { width: 20px; height: 20px; fill: white; }
+        .store-divider { height: 15px; width: 1px; background: #555; }
+
+        /* 5. MAIN CONTENT */
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+            margin-top: -40px;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            line-height: 0.85;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -3px;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .cta-btn {
+            background: white;
+            color: #FF7B00;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+
+        /* 6. FLOATING ELEMENTS */
+        .float-item {
+            position: absolute;
+            z-index: 2;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25));
+            /* REMOVED: animation: float ... */
+            /* ADDED: Smooth transition for mouse movement */
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        .float-img {
+            border-radius: 30px;
+            border: 4px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+        }
+
+        /* Positions */
+        /* Removed animation-delay as it's no longer needed */
+        .pos-hand { top: 15%; left: 20%; width: 140px; }
+        .pos-paw { top: 20%; right: 28%; width: 120px; }
+        .pos-img-left { bottom: 20%; left: 18%; width: 180px; height: 220px; transform: rotate(-5deg); }
+        .pos-img-right { bottom: 20%; right: 18%; width: 180px; height: 220px; transform: rotate(5deg); }
+        .pos-drink { bottom: 5%; left: 48%; width: 80px; transform: rotate(10deg); }
+
+        /* REMOVED @keyframes float */
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .hero-title { font-size: 5rem; }
+            .pos-img-left, .pos-img-right { width: 140px; height: 180px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-screen">
+        
+        <svg class="hero-bg-svg" viewBox="0 0 2837 1495" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="buzzGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#FE3C86"/>
+                    <stop offset="100%" stop-color="#6A35FD"/>
+                </linearGradient>
+                <pattern id="iconPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <image href="https://placehold.co/100x100/ffffff/ffffff?text=🎮+💬" x="0" y="0" width="80" height="80" opacity="0.1" />
+                </pattern>
+                <path id="heroPath" d="M2707.4 0C2752.76 0 2775.45 -0.000319289 2792.77 8.82812C2808.01 16.5939 2820.41 28.9855 2828.17 44.2266C2837 61.5534 2837 84.2356 2837 129.6V1494.07C2425.5 1463.96 1939.33 1446.56 1418.5 1446.56C897.666 1446.56 411.501 1463.96 0 1494.07V129.6C0 84.2356 -0.000324339 61.5534 8.82812 44.2266C16.5939 28.9855 28.9855 16.5939 44.2266 8.82812C61.5534 -0.000321345 84.2356 0 129.6 0H2707.4Z" />
+            </defs>
+            <use href="#heroPath" fill="url(#buzzGradient)" />
+            <use href="#heroPath" fill="url(#iconPattern)" style="mix-blend-mode: overlay;" />
+        </svg>
+
+        <nav class="navbar">
+            <img src="https://placehold.co/200x80/white/FF3C86?text=LOGO+IMG" alt="BuzzChat Logo" class="nav-logo">
+            <div class="nav-links">
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Safety</a>
+                <a href="#" class="nav-link">Blog</a>
+                <a href="#" class="nav-link">Contact us</a>
+            </div>
+            <div class="store-pill">
+                <div class="store-icon"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-137 112.9-151.5 112.9-151.5s-102.9-115-229.6-115c-57.8 0-107.9 33.9-142.5 33.9-35.7 0-89.4-33.3-146.9-33.3-75.6 0-145 43.9-184 111.5-78.7 136-20.1 337.1 56.6 448.1 37.8 54.5 83 115.6 142.1 115.6 56.9 0 78.4-36.9 147.8-36.9 68.2 0 88.5 36.5 145.3 36.5 59.2 0 103.2-54.3 141.4-114 44.7-69.8 63.1-137.4 63.5-140.7-.2-.3-122.1-46.8-123.6-194.8zm-68.5-209c32-38.8 53.7-92.9 47.8-147.7-46.2 1.9-102.1 30.7-135.2 69.2-29.8 34.2-56 89.1-49 141.6 51.5 4 104.2-27.3 136.4-63.1z"/></svg></div>
+                <div class="store-divider"></div>
+                <div class="store-icon"><svg viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l266.6-266.6L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 58.9-34.1c32.1-18.5 32.1-60.8 0-79.3zm8.3 123.1l-47-27.2-80.3-80.3-80.3 80.3-47 27.2c-12.6 7.3-26.7 11.1-40.8 11.1-14.1 0-28.2-3.7-40.8-11.1L25.3 476.7c11.4 5.8 23.9 8.7 36.5 8.7 12.6 0 25.1-2.9 36.5-8.7l232.7-133.6z"/></svg></div>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            
+            <img src="https://placehold.co/140x140/png?text=👋" class="float-item pos-hand" alt="Wave" data-speed="2">
+            
+            <img src="https://placehold.co/120x120/png?text=🐾" class="float-item pos-paw" alt="Paw" data-speed="-3">
+
+            <img src="https://placehold.co/180x220/png?text=User+Pic" class="float-item float-img pos-img-left" alt="User Left" style="--rot: -5deg;" data-speed="5">
+
+            <img src="https://placehold.co/180x220/png?text=User+Pic" class="float-item float-img pos-img-right" alt="User Right" style="--rot: 5deg;" data-speed="-5">
+
+            <img src="https://placehold.co/80x100/png?text=🥤" class="float-item pos-drink" alt="Drink" style="--rot: 10deg;" data-speed="3">
+
+            <h1 class="hero-title">
+                real<br>friends<br>real fun
+            </h1>
+
+            <a href="#" class="cta-btn">Download the app!</a>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("mousemove", (e) => {
+            const items = document.querySelectorAll(".float-item");
+            
+            // Calculate mouse position relative to center of screen
+            // x/y will be values between approx -10 and 10
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            items.forEach((item) => {
+                const speed = item.getAttribute("data-speed");
+                
+                // Calculate new position based on speed factor
+                const xMove = x * speed;
+                const yMove = y * speed;
+                
+                // We keep the var(--rot) so the images stay tilted
+                item.style.transform = `translate(${xMove}px, ${yMove}px) rotate(var(--rot, 0deg))`;
+            });
+        });
+    </script>
+</body>
+</html>

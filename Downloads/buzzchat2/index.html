@@ -4,250 +4,242 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuzzChat Hero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* 1. RESET & VARIABLES */
-        :root {
-            --bg-color: #1a1a1a; 
-            --buzz-pink: #FE3C86;
-            --buzz-purple: #6A35FD;
-            --ngl-orange: #FF5A00;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* 2. HERO CONTAINER */
-        .hero-screen {
-            position: relative;
-            width: 97%; 
-            height: 90vh; 
-            max-width: 1400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* 3. BACKGROUND SVG */
-        .hero-bg-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; 
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
-        }
-
-        /* 4. NAVBAR */
-        .navbar {
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            padding: 30px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-
-        .nav-logo {
-            height: 60px;
-            width: auto; 
-            transform: rotate(-3deg);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        
-        .nav-logo:hover {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: opacity 0.2s;
-        }
-        .nav-link:hover { opacity: 0.8; }
-
-        .store-pill {
-            background: black;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-        .store-icon svg { width: 20px; height: 20px; fill: white; }
-        .store-divider { height: 15px; width: 1px; background: #555; }
-
-        /* 5. MAIN CONTENT */
-        .hero-content {
-            position: relative;
-            z-index: 5;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            text-align: center;
-            margin-top: -40px;
-        }
-
-        .hero-title {
-            font-size: 6rem;
-            line-height: 0.85;
-            font-weight: 900;
-            color: white;
-            letter-spacing: -3px;
-            margin-bottom: 40px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .cta-btn {
-            background: white;
-            color: #FF7B00;
-            padding: 20px 50px;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-        .cta-btn:hover { transform: scale(1.05); }
-
-        /* 6. FLOATING ELEMENTS */
-        .float-item {
-            position: absolute;
-            z-index: 2;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25));
-            /* REMOVED: animation: float ... */
-            /* ADDED: Smooth transition for mouse movement */
-            transition: transform 0.1s ease-out;
-            will-change: transform;
-        }
-
-        .float-img {
-            border-radius: 30px;
-            border: 4px solid rgba(255,255,255,0.3);
-            object-fit: cover;
-        }
-
-        /* Positions */
-        /* Removed animation-delay as it's no longer needed */
-        .pos-hand { top: 15%; left: 20%; width: 140px; }
-        .pos-paw { top: 20%; right: 28%; width: 120px; }
-        .pos-img-left { bottom: 20%; left: 18%; width: 180px; height: 220px; transform: rotate(-5deg); }
-        .pos-img-right { bottom: 20%; right: 18%; width: 180px; height: 220px; transform: rotate(5deg); }
-        .pos-drink { bottom: 5%; left: 48%; width: 80px; transform: rotate(10deg); }
-
-        /* REMOVED @keyframes float */
-
-        /* Responsive */
-        @media (max-width: 1000px) {
-            .hero-title { font-size: 5rem; }
-            .pos-img-left, .pos-img-right { width: 140px; height: 180px; }
-            .nav-links { display: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="hero-screen">
-        
+    <div class="hero-screen" id="hero">
         <svg class="hero-bg-svg" viewBox="0 0 2837 1495" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="buzzGradient" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#FE3C86"/>
-                    <stop offset="100%" stop-color="#6A35FD"/>
+                    <stop offset="0%" stop-color="#6A35FD"/>
+                    <stop offset="100%" stop-color="#FE3C86"/>
                 </linearGradient>
-                <pattern id="iconPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                    <image href="https://placehold.co/100x100/ffffff/ffffff?text=🎮+💬" x="0" y="0" width="80" height="80" opacity="0.1" />
-                </pattern>
                 <path id="heroPath" d="M2707.4 0C2752.76 0 2775.45 -0.000319289 2792.77 8.82812C2808.01 16.5939 2820.41 28.9855 2828.17 44.2266C2837 61.5534 2837 84.2356 2837 129.6V1494.07C2425.5 1463.96 1939.33 1446.56 1418.5 1446.56C897.666 1446.56 411.501 1463.96 0 1494.07V129.6C0 84.2356 -0.000324339 61.5534 8.82812 44.2266C16.5939 28.9855 28.9855 16.5939 44.2266 8.82812C61.5534 -0.000321345 84.2356 0 129.6 0H2707.4Z" />
+                <clipPath id="blobClip">
+                    <use href="#heroPath" />
+                </clipPath>
             </defs>
             <use href="#heroPath" fill="url(#buzzGradient)" />
-            <use href="#heroPath" fill="url(#iconPattern)" style="mix-blend-mode: overlay;" />
+            <g opacity="0.15" style="mix-blend-mode: overlay;" clip-path="url(#blobClip)">
+                <path d="M1418.62 551.642L1303.95 -1225.13L1500.1 -1226.96L1418.62 551.642Z" fill="#ffffff"/>
+                <path d="M1381.44 554.903L912.985 -1536.94L1106.17 -1571L1381.44 554.903Z" fill="#ffffff"/>
+                <path d="M1345.35 564.557L622.676 -1134.2L807 -1201.29L1345.35 564.557Z" fill="#ffffff"/>
+                <path d="M1311.51 580.329L528.003 -580.552L697.891 -678.641L1311.51 580.329Z" fill="#ffffff"/>
+                <path d="M1280.93 601.746L-170.662 -975.604L-20.4014 -1101.68L1280.93 601.746Z" fill="#ffffff"/>
+                <path d="M1254.52 628.151L-307.463 -554.465L-181.362 -704.726L1254.52 628.151Z" fill="#ffffff"/>
+                <path d="M1233.11 658.746L-144.577 -23.4097L-46.4888 -193.274L1233.11 658.746Z" fill="#ffffff"/>
+                <path d="M1217.33 692.584L-828.479 52.3564L-761.372 -131.968L1217.33 692.584Z" fill="#ffffff"/>
+                <path d="M1207.65 728.665L-637.993 511.342L-604.813 318.02L1207.65 728.665Z" fill="#ffffff"/>
+                <path d="M1204.4 765.85L-937 863.939V667.784L1204.4 765.85Z" fill="#ffffff"/>
+                <path d="M1207.65 803.069L-422.803 1190.14L-456.866 996.957L1207.65 803.069Z" fill="#ffffff"/>
+                <path d="M1217.33 839.128L-590.967 1658.77L-694.755 1373.6L1217.33 839.128Z" fill="#ffffff"/>
+                <path d="M1233.11 872.965L-459.716 1963.57L-557.805 1793.7L1233.11 872.965Z" fill="#ffffff"/>
+                <path d="M1254.51 903.559L78.0173 2018.8L-48.0836 1868.54L1254.51 903.559Z" fill="#ffffff"/>
+                <path d="M1280.93 929.97L-20.4014 2633.42L-170.662 2507.34L1280.93 929.97Z" fill="#ffffff"/>
+                <path d="M1311.52 951.383L325.764 2854.93L155.876 2756.84L1311.52 951.383Z" fill="#ffffff"/>
+                <path d="M1345.35 967.179L789.997 2779.73L605.673 2712.65L1345.35 967.179Z" fill="#ffffff"/>
+                <path d="M1381.43 976.836L1197.01 2587.41L1003.85 2553.35L1381.43 976.836Z" fill="#ffffff"/>
+                <path d="M1418.63 980.095L1516.69 3121.48H1320.54L1418.63 980.095Z" fill="#ffffff"/>
+                <path d="M1455.82 976.836L1880.24 2819.01L1687.05 2853.08L1455.82 976.836Z" fill="#ffffff"/>
+                <path d="M1491.9 967.179L2167.57 2536.82L1983.25 2603.91L1491.9 967.179Z" fill="#ffffff"/>
+                <path d="M1525.74 951.383L2681.38 2756.84L2511.5 2854.93L1525.74 951.383Z" fill="#ffffff"/>
+                <path d="M1556.33 929.97L2857.22 2335.96L2706.6 2461.63L1556.33 929.97Z" fill="#ffffff"/>
+                <path d="M1582.73 903.559L2989.72 1956.13L2863.62 2106.39L1582.73 903.559Z" fill="#ffffff"/>
+                <path d="M1604.16 872.965L3339.54 1771.97L3240.68 1941.4L1604.16 872.965Z" fill="#ffffff"/>
+                <path d="M1619.93 839.128L3665.74 1479.36L3598.63 1663.7L1619.93 839.128Z" fill="#ffffff"/>
+                <path d="M1629.59 803.069L3240.15 987.461L3206.08 1180.62L1629.59 803.069Z" fill="#ffffff"/>
+                <path d="M1632.84 765.85L3774.24 667.784V863.939L1632.84 765.85Z" fill="#ffffff"/>
+                <path d="M1629.59 728.662L3273.06 339.276L3307.12 532.462L1629.59 728.662Z" fill="#ffffff"/>
+                <path d="M1619.93 692.589L3255.14 -36.5936L3325.08 146.665L1619.93 692.589Z" fill="#ffffff"/>
+                <path d="M1604.16 658.751L2877.47 -193.178L2975.88 -23.4949L1604.16 658.751Z" fill="#ffffff"/>
+                <path d="M1582.73 628.151L3018.62 -704.726L3144.72 -554.465L1582.73 628.151Z" fill="#ffffff"/>
+                <path d="M1556.33 601.749L2405.29 -562.578L2555.55 -436.499L1556.33 601.749Z" fill="#ffffff"/>
+                <path d="M1525.74 580.331L2395.48 -1122.26L2565.37 -1024.19L1525.74 580.331Z" fill="#ffffff"/>
+                <path d="M1491.9 564.557L2118.3 -1459.59L2302.8 -1393L1491.9 564.557Z" fill="#ffffff"/>
+                <path d="M1455.82 554.905L1662.98 -1184.78L1856.17 -1150.72L1455.82 554.905Z" fill="#ffffff"/>
+            </g>
         </svg>
 
         <nav class="navbar">
-            <img src="https://placehold.co/200x80/white/FF3C86?text=LOGO+IMG" alt="BuzzChat Logo" class="nav-logo">
+            <img src="../buzzchat2/assets/buzzlogoforweb.png" alt="BuzzChat Logo" class="nav-logo">
             <div class="nav-links">
-                <a href="#" class="nav-link">About</a>
-                <a href="#" class="nav-link">Safety</a>
-                <a href="#" class="nav-link">Blog</a>
-                <a href="#" class="nav-link">Contact us</a>
-            </div>
-            <div class="store-pill">
-                <div class="store-icon"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-137 112.9-151.5 112.9-151.5s-102.9-115-229.6-115c-57.8 0-107.9 33.9-142.5 33.9-35.7 0-89.4-33.3-146.9-33.3-75.6 0-145 43.9-184 111.5-78.7 136-20.1 337.1 56.6 448.1 37.8 54.5 83 115.6 142.1 115.6 56.9 0 78.4-36.9 147.8-36.9 68.2 0 88.5 36.5 145.3 36.5 59.2 0 103.2-54.3 141.4-114 44.7-69.8 63.1-137.4 63.5-140.7-.2-.3-122.1-46.8-123.6-194.8zm-68.5-209c32-38.8 53.7-92.9 47.8-147.7-46.2 1.9-102.1 30.7-135.2 69.2-29.8 34.2-56 89.1-49 141.6 51.5 4 104.2-27.3 136.4-63.1z"/></svg></div>
-                <div class="store-divider"></div>
-                <div class="store-icon"><svg viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l266.6-266.6L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 58.9-34.1c32.1-18.5 32.1-60.8 0-79.3zm8.3 123.1l-47-27.2-80.3-80.3-80.3 80.3-47 27.2c-12.6 7.3-26.7 11.1-40.8 11.1-14.1 0-28.2-3.7-40.8-11.1L25.3 476.7c11.4 5.8 23.9 8.7 36.5 8.7 12.6 0 25.1-2.9 36.5-8.7l232.7-133.6z"/></svg></div>
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#interactive" class="nav-link">Games</a>
+                <a href="#orbit" class="nav-link">Challenges</a>
+                <a href="#footer" class="nav-link">Contact us</a>
             </div>
         </nav>
 
         <div class="hero-content">
-            
-            <img src="https://placehold.co/140x140/png?text=👋" class="float-item pos-hand" alt="Wave" data-speed="2">
-            
-            <img src="https://placehold.co/120x120/png?text=🐾" class="float-item pos-paw" alt="Paw" data-speed="-3">
-
-            <img src="https://placehold.co/180x220/png?text=User+Pic" class="float-item float-img pos-img-left" alt="User Left" style="--rot: -5deg;" data-speed="5">
-
-            <img src="https://placehold.co/180x220/png?text=User+Pic" class="float-item float-img pos-img-right" alt="User Right" style="--rot: 5deg;" data-speed="-5">
-
-            <img src="https://placehold.co/80x100/png?text=🥤" class="float-item pos-drink" alt="Drink" style="--rot: 10deg;" data-speed="3">
+            <img src="../buzzchat2/assets/applause.png" class="float-item pos-applause" alt="Applause" data-speed="2">
+            <img src="../buzzchat2/assets/buzzer.png" class="float-item pos-paw" alt="Paw" data-speed="-3">
+            <img src="../buzzchat2/assets/vertical-selfie-portrait-group-young-multiracial-teenagers-having-fun-friendly-meeting.jpg" class="float-item float-img pos-img-left" alt="Girl profile pic" style="--rot: -5deg;" data-speed="5">
+            <img src="../buzzchat2/assets/front-view-smiley-man-taking-selfie.jpg" class="float-item float-img pos-img-right" alt="Boy selfie" style="--rot: 5deg;" data-speed="-5">
+            <img src="../buzzchat2/assets/popcorn.png" class="float-item pos-popcorn" alt="Popcorn" style="--rot: 10deg;" data-speed="3">
 
             <h1 class="hero-title">
-                real<br>friends<br>real fun
+                Play fun<br>games with<br>your group
             </h1>
 
-            <a href="#" class="cta-btn">Download the app!</a>
-
+            <a href="#join" class="cta-btn">Download the app!</a>
         </div>
-
     </div>
 
-    <script>
-        document.addEventListener("mousemove", (e) => {
-            const items = document.querySelectorAll(".float-item");
-            
-            // Calculate mouse position relative to center of screen
-            // x/y will be values between approx -10 and 10
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
+    <section class="interactive-section" id="interactive">
+        <div class="scene-layer visible" id="scene-ama">
+            <div class="chat-bubble bubble-1">Who is the least sincere in their friendships?</div>
+            <div class="chat-bubble bubble-2">Who is most likely to become a superstar?</div>
+            <div class="chat-bubble bubble-3">Who's hotter?</div>
+            <div class="chat-bubble bubble-4">Who tells better jokes?</div>
+            <div class="float-emoji crown-emoji animated-float" style="--rot: -15deg;">👑</div>
+            <div class="float-emoji heart-emoji animated-float" style="--rot: 15deg;">💖</div>
+            <div class="float-emoji fire-emoji animated-float" style="--rot: 0deg;">🔥</div>
+        </div>
+        <div class="scene-layer" id="scene-nhie">
+            <div class="chat-bubble bubble-1">...eaten a whole pizza? 🍕</div>
+            <div class="chat-bubble bubble-2">..broke something and blamed it on next person?</div>
+            <div class="chat-bubble bubble-3">...ghosted someone? 👻</div>
+            <div class="float-emoji crown-emoji animated-float" style="--rot: 10deg; left: 10%;">🍺</div>
+            <div class="float-emoji heart-emoji animated-float" style="--rot: -10deg; right: 10%;">🙈</div>
+        </div>
+        <div class="scene-layer" id="scene-confess">
+            <div class="chat-bubble bubble-2">have wings or gills?</div>
+            <div class="chat-bubble bubble-3">be dumb but rich or smart but poor?</div>
+            <div class="chat-bubble bubble-4">be Spiderman's or Batman's best friend?</div>
+            <div class="float-emoji crown-emoji animated-float" style="--rot: 5deg; left: 15%;">🔒</div>
+            <div class="float-emoji heart-emoji animated-float" style="--rot: -5deg; right: 15%;">🤫</div>
+        </div>
+        <div class="scene-layer" id="scene-words">
+            <div class="chat-bubble bubble-1">you sold your dog to your ex after breakup?</div>
+            <div class="chat-bubble bubble-4">Diana lied about going to Paris and went to Bali?</div>
+            <div class="float-emoji crown-emoji animated-float" style="--rot: -20deg; left: 25%;">📝</div>
+            <div class="float-emoji heart-emoji animated-float" style="--rot: 20deg; right: 25%;">✨</div>
+        </div>
+        <div class="interactive-container">
+            <h2 class="menu-header">play fun<br>games</h2>
+            <div class="menu-list">
+                <div class="menu-item active" data-target="scene-ama">live game</div>
+                <div class="menu-item" data-target="scene-nhie">never have I ever</div>
+                <div class="menu-item" data-target="scene-confess">would you rather?</div>
+                <div class="menu-item" data-target="scene-words">is it truth that?</div>
+            </div>
+        </div>
+    </section>
 
-            items.forEach((item) => {
-                const speed = item.getAttribute("data-speed");
-                
-                // Calculate new position based on speed factor
-                const xMove = x * speed;
-                const yMove = y * speed;
-                
-                // We keep the var(--rot) so the images stay tilted
-                item.style.transform = `translate(${xMove}px, ${yMove}px) rotate(var(--rot, 0deg))`;
-            });
-        });
-    </script>
+    <section class="orbit-section" id="orbit">
+        
+        <svg class="green-bg-svg" viewBox="0 0 2837 1520" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2707.4 0C2752.76 0 2775.45 -0.000319289 2792.77 8.82812C2808.01 16.5939 2820.41 28.9855 2828.17 44.2266C2837 61.5534 2837 84.2356 2837 129.6V1390.4C2837 1435.76 2837 1458.45 2828.17 1475.77C2820.41 1491.01 2808.01 1503.41 2792.77 1511.17C2775.45 1520 2752.76 1520 2707.4 1520H129.6C84.2356 1520 61.5534 1520 44.2266 1511.17C28.9855 1503.41 16.5939 1491.01 8.82812 1475.77C-0.0003214 1458.45 0 1435.76 0 1390.4V129.6C0 84.2356 -0.000324338 61.5534 8.82812 44.2266C16.5939 28.9855 28.9855 16.5939 44.2266 8.82812C61.5534 -0.000321345 84.2356 0 129.6 0H2707.4Z" fill="#12D660"/>
+        </svg>
+
+        <div class="center-avatar-container">
+            <img src="../buzzchat2/assets/stylish-young-bearded-male-blogger-with-backpack-posing-outdoors-while-recording-video-taking-selfie.jpg" class="center-avatar-img" alt="Center Profile">
+            <div class="center-crown">👑</div>
+        </div>
+        <div class="orbit-card card-1">
+            <div class="lb-header">Top Gifters<svg class="lb-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></div>
+            <div class="lb-stat"><span class="lb-rank">#1</span><img src="../buzzchat2/assets/front-view-smiley-man-taking-selfie.jpg" class="lb-avatar" alt="User"><span class="lb-name">Leo Leoan</span><div class="lb-pill">🏆 120</div></div>
+        </div>
+        <div class="orbit-card card-2">
+            <div class="lb-header">Rizz Masters<svg class="lb-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></div>
+            <div class="lb-stat"><span class="lb-rank">#1</span><img src="../buzzchat2/assets/vertical-selfie-portrait-group-young-multiracial-teenagers-having-fun-friendly-meeting.jpg" class="lb-avatar" alt="User"><span class="lb-name">Sarah J.</span><div class="lb-pill">🏆 98</div></div>
+        </div>
+        <div class="orbit-card card-3">
+            <div class="lb-header">Most Active<svg class="lb-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></div>
+            <div class="lb-stat"><span class="lb-rank">#1</span><img src="../buzzchat2/assets/joyful-brunette-woman-pink-hoodie-trendy-sunglasses-smiles-sincerely-takes-selfie-good-mood-outside.jpg" class="lb-avatar" alt="User"><span class="lb-name">Mikaela</span><div class="lb-pill">🏆 240</div></div>
+        </div>
+        <div class="orbit-card card-4">
+            <div class="lb-header">Comedy Kings<svg class="lb-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></div>
+            <div class="lb-stat"><span class="lb-rank">#1</span><img src="../buzzchat2/assets/urban-man-handsome-young-man-white-tshirt-city-center.jpg" class="lb-avatar" alt="User"><span class="lb-name">Alex P.</span><div class="lb-pill">🏆 150</div></div>
+        </div>
+        <div class="orbit-card card-5">
+            <div class="lb-header">Trendsetters<svg class="lb-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></div>
+            <div class="lb-stat"><span class="lb-rank">#1</span><img src="../buzzchat2/assets/positive-carefree-woman-with-two-hair-buns-wears-trendy-pink-sunglasses-blouse-carries-shopping-bags-poses-outdoors-daytime-smiling-female-shopper-poses-making-selfie-city.jpg" class="lb-avatar" alt="User"><span class="lb-name">Jasmine</span><div class="lb-pill">🏆 300</div></div>
+        </div>
+        <div class="orbit-footer-text">take your place<br>among the best</div>
+    </section>
+
+    <section class="chat-section">
+        <h2 class="chat-header">no boring<br>convos</h2>
+        <div class="chat-phone-container">
+            <div class="msg-row row-left msg-dad">
+                <img src="../buzzchat2/assets/hiking-is-good-soul-shot-senior-man-taking-selfie-while-out-hike.jpg" class="chat-avatar" alt="Dad">
+                <div class="msg-box msg-left">
+                    <span class="msg-label">DAD</span>
+                    Ok kids, game time! This BuzzChat app is actually hilarious.
+                </div>
+            </div>
+            <div class="msg-row row-right msg-you">
+                <div class="msg-box msg-right">
+                    <span class="msg-label">YOU</span>
+                    Glad you like it! Wait until you see the next question... 😈
+                </div>
+                <img src="../buzzchat2/assets/stylish-young-bearded-male-blogger-with-backpack-posing-outdoors-while-recording-video-taking-selfie.jpg" class="chat-avatar" alt="You">
+            </div>
+            <div class="msg-row row-left msg-mom">
+                <img src="../buzzchat2/assets/mamacita.png" class="chat-avatar" alt="Mom">
+                <div class="msg-box msg-left">
+                    <span class="msg-label">MOM</span>
+                    Two truths and a lie: I knew your secrets anyway! 😂
+                </div>
+            </div>
+            <div class="msg-row row-left msg-sis">
+                <img src="../buzzchat2/assets/emotions-expressions-people-concept-happy-smiling-young-woman-taking-selfie-blue-sky-clouds-background.jpg" class="chat-avatar" alt="Sis">
+                <div class="msg-box msg-left">
+                    <span class="msg-label">SIS</span>
+                    Yoo 💀 Take it easy on us mom!
+                </div>
+            </div>
+        </div>
+        <div class="side-emoji emoji-laugh">😂</div>
+        <div class="side-emoji emoji-skull">💀</div>
+        <div class="side-emoji emoji-fire">🔥</div>
+    </section>
+
+    <section class="join-section" id="join">
+        
+        <svg class="green-bg-svg" viewBox="0 0 2837 1520" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2707.4 0C2752.76 0 2775.45 -0.000319289 2792.77 8.82812C2808.01 16.5939 2820.41 28.9855 2828.17 44.2266C2837 61.5534 2837 84.2356 2837 129.6V1390.4C2837 1435.76 2837 1458.45 2828.17 1475.77C2820.41 1491.01 2808.01 1503.41 2792.77 1511.17C2775.45 1520 2752.76 1520 2707.4 1520H129.6C84.2356 1520 61.5534 1520 44.2266 1511.17C28.9855 1503.41 16.5939 1491.01 8.82812 1475.77C-0.0003214 1458.45 0 1435.76 0 1390.4V129.6C0 84.2356 -0.000324338 61.5534 8.82812 44.2266C16.5939 28.9855 28.9855 16.5939 44.2266 8.82812C61.5534 -0.000321345 84.2356 0 129.6 0H2707.4Z" fill="#FD3582"/>
+        </svg>
+
+        <img src="../buzzchat2/assets/chicken.png" class="join-float join-pos-1" alt="Chicken" data-speed="2">
+        <div class="join-float join-pos-2" data-speed="-3">👑</div>
+        <img src="../buzzchat2/assets/vertical-selfie-portrait-group-young-multiracial-teenagers-having-fun-friendly-meeting.jpg" class="join-float join-pos-3" alt="User 1" data-speed="4">
+        <img src="../buzzchat2/assets/front-view-smiley-man-taking-selfie.jpg" class="join-float join-pos-4" alt="User 2" data-speed="-4">
+        <img src="../buzzchat2/assets/alien.png" class="join-float join-pos-5" alt="Alien" data-speed="3">
+        <img src="../buzzchat2/assets/moneky.png" class="join-float join-pos-6" alt="Monkey" data-speed="-2">
+
+        <h2 class="join-header">join<br>the fun</h2>
+
+        <div class="join-buttons">
+            <a href="https://apps.apple.com/us/app/buzzchat-party-chat/id6747866881" target="_blank"><img src="../buzzchat2/assets/Download_on_the_App_Store_Badge.svg.png" class="store-badge" alt="App Store"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.gtm.chatfriend&hl=en" target="_blank"><img src="../buzzchat2/assets/google-play-badge-logo-black-and-white.png" class="store-badge" alt="Google Play"></a>
+        </div>
+
+    </section>
+
+    <footer class="app-footer" id="footer">
+        <div class="footer-row">
+            <img src="../buzzchat2/assets/buzzlogoforweb.png" class="footer-logo" alt="BuzzChat Logo">
+            
+            <div class="footer-nav">
+                <a class="footer-link">Contact us</a>
+            </div>
+        </div>
+
+        <div class="footer-row">
+            <div class="footer-legal">
+                <a class="footer-link" style="font-size: 1rem;">Terms of Service</a>
+                <a class="footer-link" style="font-size: 1rem;">Privacy Policy</a>
+            </div>
+
+            <div class="footer-credit">
+                ©Greentomatomedia Limited.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
